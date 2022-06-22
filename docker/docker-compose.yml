@@ -1,0 +1,18 @@
+version: '3.7'
+
+volumes:
+  mysql_data:
+
+services:
+  mysql:
+    container_name: mysql
+    hostname: mysql
+    image: mysql:8.0.29
+    environment:
+      MYSQL_DATABASE: doeja
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
