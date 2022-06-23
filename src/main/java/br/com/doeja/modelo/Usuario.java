@@ -25,6 +25,8 @@ public class Usuario implements UserDetails {
 	private String cpf;
 	private String email;
 	private String senha;
+	private String tipoSanguineo;
+	private String linkImagem;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Perfil> perfis = new ArrayList<>();
@@ -32,11 +34,28 @@ public class Usuario implements UserDetails {
 	public Usuario() {
 	}
 
+	public Usuario(String nome, String cpf, String email, String senha, String tipoSanguineo, String linkImagem) {
+		this.nome = nome;
+		this.cpf = cpf;
+		this.email = email;
+		this.senha = senha;
+		this.tipoSanguineo = tipoSanguineo;
+		this.linkImagem = linkImagem;
+	}
+
 	public Usuario(String nome, String cpf, String email, String senha) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
 		this.senha = senha;
+	}
+
+	public Usuario(String nome, String cpf, String email, String senha, String tipoSanguineo) {
+		this.nome = nome;
+		this.cpf = cpf;
+		this.email = email;
+		this.senha = senha;
+		this.tipoSanguineo = tipoSanguineo;
 	}
 
 	public Long getId() {
@@ -74,6 +93,14 @@ public class Usuario implements UserDetails {
 	public String getCpf() {return cpf;}
 
 	public void setCpf(String cpf) {this.cpf = cpf;}
+
+	public String getTipoSanguineo() {return tipoSanguineo;}
+
+	public void setTipoSanguineo(String tipoSanguineo) {this.tipoSanguineo = tipoSanguineo;}
+
+	public String getLinkImagem() {return linkImagem;}
+
+	public void setLinkImagem(String linkImagem) {this.linkImagem = linkImagem;}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

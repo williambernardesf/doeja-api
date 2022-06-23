@@ -10,6 +10,7 @@ public class UsuarioForm {
     private String cpf;
     private String email;
     private String senha;
+    private String tipoSanguineo;
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -20,12 +21,12 @@ public class UsuarioForm {
     public void setEmail(String email) {
         this.email = email;
     }
-
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    public void setTipoSanguineo(String tipoSanguineo) {this.tipoSanguineo = tipoSanguineo;}
 
     public Usuario converter(UsuarioRepository repository){
-        return new Usuario(nome, cpf, email, new BCryptPasswordEncoder().encode(senha));
+        return new Usuario(nome, cpf, email, new BCryptPasswordEncoder().encode(senha), tipoSanguineo);
     }
 }
