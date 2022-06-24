@@ -1,5 +1,6 @@
 package br.com.doeja.controller.dto;
 
+import br.com.doeja.modelo.BancoSangue;
 import br.com.doeja.modelo.Doacao;
 import lombok.Data;
 
@@ -11,13 +12,13 @@ public class DoacaoDto {
 
     private Long id;
     private Long usuarioId;
-    private Long bancoSangueId;
+    private BancoSangue bancoSangue;
     private String horarioMarcado;
 
     public DoacaoDto(Doacao doacao){
         this.id = doacao.getId();
         this.usuarioId = doacao.getUsuarioId();
-        this.bancoSangueId = doacao.getBancoSangueId();
+        this.bancoSangue = doacao.getBancoSangue();
         this.horarioMarcado = doacao.getHorarioMarcado();
     }
 
@@ -25,12 +26,19 @@ public class DoacaoDto {
     public void setId(Long id) {this.id = id;}
     public Long getUsuarioId() {return usuarioId;}
     public void setUsuarioId(Long usuarioId) {this.usuarioId = usuarioId;}
-    public Long getBancoSangueId() {return bancoSangueId;}
-    public void setBancoSangueId(Long bancoSangueId) {this.bancoSangueId = bancoSangueId;}
+
     public String getHorarioMarcado() {return horarioMarcado;}
     public void setHorarioMarcado(String horarioMarcado) {this.horarioMarcado = horarioMarcado;}
 
     public static List<DoacaoDto> converter(List<Doacao> doacao){
         return doacao.stream().map(DoacaoDto::new).collect(Collectors.toList());
+    }
+
+    public BancoSangue getBancoSangue() {
+        return bancoSangue;
+    }
+
+    public void setBancoSangue(BancoSangue bancoSangue) {
+        this.bancoSangue = bancoSangue;
     }
 }

@@ -18,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/hemobanco")
+@CrossOrigin(origins = "*")
 public class BancoSangueController {
 
     @Autowired

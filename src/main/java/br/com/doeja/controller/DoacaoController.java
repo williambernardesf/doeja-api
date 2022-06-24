@@ -6,6 +6,7 @@ import br.com.doeja.controller.form.DoacaoForm;
 import br.com.doeja.controller.form.PreTriagemForm;
 import br.com.doeja.modelo.Doacao;
 import br.com.doeja.modelo.PreTriagem;
+import br.com.doeja.repository.BancoSangueRepository;
 import br.com.doeja.repository.DoacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,14 +25,17 @@ public class DoacaoController {
     @Autowired
     private DoacaoRepository repository;
 
+    @Autowired
+    private BancoSangueRepository bancoSangueRepository;
+
     @PostMapping
     @Transactional
     public ResponseEntity<DoacaoDto> cadastrar(@RequestBody final DoacaoForm form, UriComponentsBuilder uriBuilder) {
-        Doacao doacao = form.converter(repository);
-        repository.save(doacao);
+        Doacao doacao = form.converter(repository, bancoSangueRepository);
+        Doacao saved = repository.save(doacao);
 
         URI uri = uriBuilder.path("/cadastro/{id}").buildAndExpand(doacao.getId()).toUri();
-        return ResponseEntity.created(uri).body(new DoacaoDto(doacao));
+        return ResponseEntity.created(uri).body(new DoacaoDto(saved));
     }
 
     @GetMapping("/{id}")

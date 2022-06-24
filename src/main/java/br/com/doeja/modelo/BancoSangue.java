@@ -1,6 +1,7 @@
 package br.com.doeja.modelo;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class BancoSangue {
@@ -22,6 +23,9 @@ public class BancoSangue {
     private String sangueOMais;
     private String sangueOMenos;
 
+
+    @OneToMany()
+    private List<Doacao> doacoes;
     public BancoSangue() {
     }
 
