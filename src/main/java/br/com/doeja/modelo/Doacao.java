@@ -1,9 +1,6 @@
 package br.com.doeja.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,15 +10,18 @@ public class Doacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long usuarioId;
-    private Long bancoSangueId;
+
+    @ManyToOne()
+    @JoinColumn(name = "banco_sangue_id")
+    private BancoSangue bancoSangue;
     private String horarioMarcado;
 
     public Doacao() {
     }
 
-    public Doacao(Long usuarioId, Long bancoSangueId, String horarioMarcado) {
+    public Doacao(Long usuarioId, BancoSangue bancoSangue, String horarioMarcado) {
         this.usuarioId = usuarioId;
-        this.bancoSangueId = bancoSangueId;
+        this.bancoSangue = bancoSangue;
         this.horarioMarcado = horarioMarcado;
     }
 
@@ -29,8 +29,15 @@ public class Doacao {
     public void setId(Long id) {this.id = id;}
     public Long getUsuarioId() {return usuarioId;}
     public void setUsuarioId(Long usuarioId) {this.usuarioId = usuarioId;}
-    public Long getBancoSangueId() {return bancoSangueId;}
-    public void setBancoSangueId(Long bancoSangueId) {this.bancoSangueId = bancoSangueId;}
+
     public String getHorarioMarcado() {return horarioMarcado;}
     public void setHorarioMarcado(String horarioMarcado) {this.horarioMarcado = horarioMarcado;}
+
+    public BancoSangue getBancoSangue() {
+        return bancoSangue;
+    }
+
+    public void setBancoSangue(BancoSangue bancoSangue) {
+        this.bancoSangue = bancoSangue;
+    }
 }
